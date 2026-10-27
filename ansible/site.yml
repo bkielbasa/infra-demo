@@ -1,0 +1,8 @@
+---
+- name: infra-guy ansible demo
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Record the demo message
+      ansible.builtin.debug:
+        msg: "{{ message | default('hello from the ansible engine') }}"

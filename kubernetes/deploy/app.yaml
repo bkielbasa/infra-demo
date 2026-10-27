@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: infra-demo
+  namespace: demo
+  labels:
+    app.kubernetes.io/managed-by: infra-guy
+data:
+  message: hello from the kubernetes engine
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infra-demo
+  namespace: demo
+  labels:
+    app.kubernetes.io/managed-by: infra-guy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infra-demo
+  template:
+    metadata:
+      labels:
+        app: infra-demo
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.27.0
